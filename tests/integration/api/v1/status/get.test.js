@@ -9,5 +9,7 @@ test("GET to api/v1/status endpoint should return 200", async () => {
   const parsedUpdatedAt = new Date(responseBody[0].updated_at).toISOString();
   expect(responseBody[0].updated_at).toEqual(parsedUpdatedAt);
 
+  expect(responseBody[0].dependencies.database.opened_connections).toEqual(1);
+
   console.log(responseBody);
 });
