@@ -12,12 +12,16 @@ export default async function status(request, response) {
   const maxConnectionsResult = await database.query("SHOW max_connections;");
   const maxConnections = parseInt(maxConnectionsResult.rows[0].max_connections);
 
+  const databaseVersionResult = await database.query("SHOW server_version;");
+  const databaseVersion = databaseVersionResult.rows[0].server_version;
+
   response.status(200).json([{
     updated_at: updatedAt,
     dependencies: {
       database: {
         opened_connections: openedConnections,
-        max_connections: maxConnections
+        max_connections: maxConnections,
+        version: databaseVersion
       }
     }
   }]);
