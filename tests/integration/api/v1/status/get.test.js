@@ -11,5 +11,7 @@ test("GET to api/v1/status endpoint should return 200", async () => {
 
   expect(responseBody[0].dependencies.database.opened_connections).toEqual(1);
 
+  expect(responseBody[0].dependencies.database.max_connections).toEqual(100);
+
   console.log(responseBody);
 });
